@@ -1,0 +1,45 @@
+h1,
+p {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+svg {
+    border: 1px solid #ccc;
+    fill: #6f9c76;
+    stroke: #ffffff;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: .5;
+}
+
+.county {
+    cursor: pointer;
+    transition: fill 0.3s;
+}
+
+.county:hover {
+    fill: #FFEB3B;
+}
+
+.county-hit:hover {
+    fill: #FFEB3B;
+}
+
+.selected {
+    fill: #FF5722;
+}
+
+#info {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+.county-hit {
+    fill: transparent;
+    stroke: transparent;
+    cursor: pointer;
+    stroke-width: 50;
+    pointer-events: visibleStroke;
+}
