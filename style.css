@@ -54,6 +54,9 @@ svg {
 }
 
 #card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 300px;
     min-height: 450px;
     background: #fff;

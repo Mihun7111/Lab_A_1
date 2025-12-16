@@ -1,15 +1,3 @@
-// function showInfo(text, id) {
-//     document.getElementById('info').innerText = text;
-
-//     // 移除所有縣市的選取狀態
-//     document.querySelectorAll('.county').forEach(el => {
-//         el.classList.remove('selected');
-//     });
-
-//     // 對被點選的縣市加上選取樣式
-//     document.getElementById(id).classList.add('selected');
-// }
-
 let cardInfo = document.getElementById('info');
 let countyEl = document.querySelectorAll('#features g[data-county-name]');
 console.log(countyEl);
@@ -40,7 +28,7 @@ for (let countyData of countyEl) {
             hitCounty.classList.add("selected");
         }
 
-        cardInfo.style.opacity = '1'; // Ensure visibility
+        cardInfo.style.opacity = '1'; 
         cardInfo.classList.add("selected");
         cardInfo.innerHTML = `
             <h2>${name}</h2>
