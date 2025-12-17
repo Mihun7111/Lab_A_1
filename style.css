@@ -78,7 +78,7 @@ svg {
     opacity: 1;
 }
 
-#large-image-area {
+#image-area {
     position: relative;
     top: -25px;
     width: 80%;
@@ -93,7 +93,7 @@ svg {
     text-align: center;
 }
 
-#large-region-image {
+#region-image {
     display: block;
     width: 100%;
     height: auto;
@@ -106,13 +106,20 @@ svg {
     transition: opacity 0.5s ease;
 }
 
-#large-image-area.visible #large-region-image {
+#image-area.visible #region-image {
     opacity: 1;
     /* 點擊後完全顯示 */
 }
 
-#large-image-caption {
+#image-caption {
     margin-top: 10px;
     color: #777;
     font-size: 1.1em;
+}
+
+#regionSelect {
+    display: block;
+    margin: 20px auto;
+    padding: 8px;
+    font-size: 16px;
 }

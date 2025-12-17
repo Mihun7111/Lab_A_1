@@ -4,9 +4,9 @@ console.log(countyEl);
 
 let allCountyData = [];
 
-let largeImageArea = document.getElementById('large-image-area');
-let largeImage = document.getElementById('large-region-image');
-let largeCaption = document.getElementById('large-image-caption');
+let imageArea = document.getElementById('image-area');
+let regionImage = document.getElementById('region-image');
+let imageCaption = document.getElementById('image-caption');
 
 for (let countyData of countyEl) {
     let name = countyData.getAttribute('data-county-name');
@@ -24,9 +24,9 @@ for (let countyData of countyEl) {
         }
     }
 
-    function select() {
-        let largeImg = countyData.getAttribute('data-large-img');
-        let largeCaptionText = countyData.getAttribute('data-large-caption');
+    function selected() {
+        let img = countyData.getAttribute('data-img');
+        let captionText = countyData.getAttribute('data-caption');
 
         clearSelect();
 
@@ -42,16 +42,19 @@ for (let countyData of countyEl) {
             <p>人口: ${pop}</p>
             <p>特點: ${feature}</p>
         `;
-        largeImage.src = largeImg;
-        largeCaption.textContent = largeCaptionText;
-        largeImageArea.classList.add("visible");
+
+        imageArea.classList.add("visible");
+        regionImage.src = img;
+        imageCaption.textContent = captionText;
+
+        select.value = name;
     }
 
     if (county) {
-        county.addEventListener("click", select);
+        county.addEventListener("click", selected);
     }
     if (hitCounty) {
-        hitCounty.addEventListener("click", select);
+        hitCounty.addEventListener("click", selected);
     }
 }
 console.log(allCountyData);
