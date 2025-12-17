@@ -60,20 +60,22 @@ console.log(allCountyData);
 
 
 let regionSelect = document.getElementById('regionSelect');
-regionSelect.addEventListener('change', (e) => {
+regionSelect.addEventListener('change', function (e) {
     let val = e.target.value;
 
+
     if (!val) {
-        // Create a basic clear function since the original one is scoped
-        document.querySelectorAll(".county, .county-hit").forEach(el => el.classList.remove("selected"));
+        clearSelect()
         cardInfo.style.opacity = '0';
         cardInfo.classList.remove("selected");
         imageArea.classList.remove("visible");
         return;
     }
 
-    let target = document.querySelector(`g[data-county-name="${val}"] .county`);
+    let target = document.querySelector(`g[data-county-name="${val}"]`);
+    console.log(target);
     if (target) {
-        target.dispatchEvent(new MouseEvent('click'));
+        let county = target.querySelector('.county');
+        county.dispatchEvent(new Event('click'));
     }
 });
