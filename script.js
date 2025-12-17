@@ -47,7 +47,6 @@ for (let countyData of countyEl) {
         regionImage.src = img;
         imageCaption.textContent = captionText;
 
-        select.value = name;
     }
 
     if (county) {
@@ -59,3 +58,22 @@ for (let countyData of countyEl) {
 }
 console.log(allCountyData);
 
+
+let regionSelect = document.getElementById('regionSelect');
+regionSelect.addEventListener('change', (e) => {
+    let val = e.target.value;
+
+    if (!val) {
+        // Create a basic clear function since the original one is scoped
+        document.querySelectorAll(".county, .county-hit").forEach(el => el.classList.remove("selected"));
+        cardInfo.style.opacity = '0';
+        cardInfo.classList.remove("selected");
+        imageArea.classList.remove("visible");
+        return;
+    }
+
+    let target = document.querySelector(`g[data-county-name="${val}"] .county`);
+    if (target) {
+        target.dispatchEvent(new MouseEvent('click'));
+    }
+});
