@@ -9,7 +9,7 @@ header {
 main {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     gap: 20px;
 }
 
@@ -76,4 +76,43 @@ svg {
 
 .info-panel.selected {
     opacity: 1;
+}
+
+#large-image-area {
+    position: relative;
+    top: -25px;
+    width: 80%;
+    /* 讓圖片寬度佔據頁面大部分 */
+    max-width: 900px;
+    margin: 40px auto 0;
+    /* 距離地圖容器 40px，並水平置中 */
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+#large-region-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    /* 限制大圖高度 */
+    object-fit: cover;
+    border-radius: 4px;
+    opacity: 0.1;
+    /* 初始降低透明度，讓它不那麼顯眼 */
+    transition: opacity 0.5s ease;
+}
+
+#large-image-area.visible #large-region-image {
+    opacity: 1;
+    /* 點擊後完全顯示 */
+}
+
+#large-image-caption {
+    margin-top: 10px;
+    color: #777;
+    font-size: 1.1em;
 }

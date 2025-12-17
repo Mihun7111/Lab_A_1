@@ -4,6 +4,10 @@ console.log(countyEl);
 
 let allCountyData = [];
 
+let largeImageArea = document.getElementById('large-image-area');
+let largeImage = document.getElementById('large-region-image');
+let largeCaption = document.getElementById('large-image-caption');
+
 for (let countyData of countyEl) {
     let name = countyData.getAttribute('data-county-name');
     let pop = countyData.getAttribute('data-population');
@@ -21,6 +25,9 @@ for (let countyData of countyEl) {
     }
 
     function select() {
+        let largeImg = countyData.getAttribute('data-large-img');
+        let largeCaptionText = countyData.getAttribute('data-large-caption');
+
         clearSelect();
 
         county.classList.add("selected");
@@ -28,13 +35,16 @@ for (let countyData of countyEl) {
             hitCounty.classList.add("selected");
         }
 
-        cardInfo.style.opacity = '1'; 
+        cardInfo.style.opacity = '1';
         cardInfo.classList.add("selected");
         cardInfo.innerHTML = `
             <h2>${name}</h2>
             <p>人口: ${pop}</p>
             <p>特點: ${feature}</p>
         `;
+        largeImage.src = largeImg;
+        largeCaption.textContent = largeCaptionText;
+        largeImageArea.classList.add("visible");
     }
 
     if (county) {
