@@ -16,7 +16,6 @@ function clearSelect() {
 
 function activate(countyData) {
     let name = countyData.getAttribute('data-county-name');
-    let pop = countyData.getAttribute('data-population');
     let feature = countyData.getAttribute('data-feature');
     let img = countyData.getAttribute('data-img');
     let captionText = countyData.getAttribute('data-caption');
@@ -29,24 +28,50 @@ function activate(countyData) {
     if (county) county.classList.add("selected");
     if (hitCounty) hitCounty.classList.add("selected");
 
+    let spotsHTML = "";
+    if (countyData.getAttribute('data-spot1-name')) {
+        spotsHTML += `
+    <p>
+        <span class="spot-link" data-img="${countyData.getAttribute('data-spot1-img')}">
+            ${countyData.getAttribute('data-spot1-name')}
+        </span>
+    </p>
+        `;
+    }
+    
     cardInfo.style.opacity = '1';
     cardInfo.classList.add("selected");
     cardInfo.innerHTML = `
         <h2>${name}</h2>
-        <p>人口: ${pop}</p>
         <p>特點: ${feature}</p>
+        ${spotsHTML}
     `;
 
     imageArea.classList.add("visible");
     regionImage.src = img;
     imageCaption.textContent = captionText;
+    
+    let spots = document.querySelectorAll(".spot-link");
+    for (let spot of spots) {
+        
+        function spotClicked() {
+            let img = this.getAttribute('data-img');
+            let captionText = this.textContent;
+            regionImage.src = img;
+            imageCaption.textContent = captionText;
+
+        }
+        
+        spot.addEventListener("click", spotClicked);
+    }
+    
 }
+
 
 for (let countyData of countyEl) {
     let name = countyData.getAttribute('data-county-name');
-    let pop = countyData.getAttribute('data-population');
     let feature = countyData.getAttribute('data-feature');
-    allCountyData.push({ name, pop, feature });
+    allCountyData.push({ name, feature });
 
     let county = countyData.querySelector(".county");
     let hitCounty = countyData.querySelector(".county-hit");
