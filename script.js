@@ -14,6 +14,14 @@ function clearSelect() {
     }
 }
 
+function resetMapState() {
+    clearSelect();
+    cardInfo.style.opacity = '0';
+    cardInfo.classList.remove("selected");
+    imageArea.classList.remove("visible");
+    regionSelect.value = "";
+}
+
 function activate(countyData) {
     let name = countyData.getAttribute('data-county-name');
     let feature = countyData.getAttribute('data-feature');
@@ -29,16 +37,15 @@ function activate(countyData) {
     if (hitCounty) hitCounty.classList.add("selected");
 
     let spotsHTML = "";
-    if (countyData.getAttribute('data-spot1-name')) {
-        spotsHTML += `
-    <p>
-        <span class="spot-link" data-img="${countyData.getAttribute('data-spot1-img')}">
-            ${countyData.getAttribute('data-spot1-name')}
-        </span>
-    </p>
-        `;
+    for (let i = 1; i <= 3; i++) {
+        let spotname = countyData.getAttribute(`data-spot${i}-name`);
+        let spotimg = countyData.getAttribute(`data-spot${i}-img`);
+        if (spotname) {
+            spotsHTML +=
+                `<button class="spot-btn" data-img="${spotimg}">${spotname}</button>`;
+        }
     }
-    
+
     cardInfo.style.opacity = '1';
     cardInfo.classList.add("selected");
     cardInfo.innerHTML = `
@@ -50,21 +57,28 @@ function activate(countyData) {
     imageArea.classList.add("visible");
     regionImage.src = img;
     imageCaption.textContent = captionText;
-    
-    let spots = document.querySelectorAll(".spot-link");
+
+    let spots = document.querySelectorAll(".spot-btn");
     for (let spot of spots) {
-        
+
         function spotClicked() {
             let img = this.getAttribute('data-img');
             let captionText = this.textContent;
             regionImage.src = img;
             imageCaption.textContent = captionText;
 
+            // ✅ 清除舊的 active
+            for (var s of spots) {
+                s.classList.remove("active");
+            }
+
+            // ✅ 設定目前按下的按鈕為 active
+            this.classList.add("active");
         }
-        
+
         spot.addEventListener("click", spotClicked);
     }
-    
+
 }
 
 
@@ -97,10 +111,7 @@ function changeSelect(e) {
     console.log(val);
 
     if (!val) {
-        clearSelect()
-        cardInfo.style.opacity = '0';
-        cardInfo.classList.remove("selected");
-        imageArea.classList.remove("visible");
+        resetMapState();
         return;
     }
 
@@ -111,3 +122,9 @@ function changeSelect(e) {
     }
 }
 regionSelect.addEventListener('change', changeSelect);
+
+document.querySelector('svg').addEventListener('click', function (e) {
+    if (!e.target.closest('g[data-county-name]')) {
+        resetMapState();
+    }
+});

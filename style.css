@@ -91,6 +91,11 @@ svg {
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     text-align: center;
+    display: none;
+}
+
+#image-area.visible {
+    display: block;
 }
 
 #region-image {
@@ -119,7 +124,36 @@ svg {
 
 #regionSelect {
     display: block;
-    margin: 10px auto;
+    margin: 10px;
     padding: 8px;
     font-size: 16px;
+}
+
+.spot-btn {
+    display: inline-block;
+    margin: 5px 5px 0 0;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: 1px solid #888;
+    border-radius: 4px;
+    background: #f5f5f5;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.spot-btn:hover {
+    background: #ffcc66;
+    border-color: #cc9933;
+}
+
+.spot-btn:active {
+    background: #ff9933;
+    color: #fff;
+}
+
+.spot-btn.active {
+    background: #ff9933;
+    color: #fff;
+    border-color: #cc6600;
+    font-weight: bold;
 }
