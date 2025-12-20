@@ -128,3 +128,58 @@ document.querySelector('svg').addEventListener('click', function (e) {
         resetMapState();
     }
 });
+
+// Slideshow Functionality
+(function() {
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevArrow');
+    const nextBtn = document.getElementById('nextArrow');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Only run if slides exist
+    if (slides.length === 0) return;
+
+    function showSlide(index) {
+        slides[currentSlide].classList.remove('active');
+        // Calculate new index with wrap-around
+        currentSlide = (index + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    function startSlideShow() {
+        // Clear any existing interval just in case
+        if (slideInterval) clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 3000);
+    }
+
+    function resetInterval() {
+        clearInterval(slideInterval);
+        startSlideShow();
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+    }
+
+    // Start the automatic slideshow
+    startSlideShow();
+})();
