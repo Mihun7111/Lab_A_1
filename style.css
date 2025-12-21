@@ -1,48 +1,70 @@
+/* Reset & Body */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f0f2f5; /* Soft modern gray */
+    color: #333;
+    line-height: 1.6;
+}
+
 header {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #333;
-    color: #fff;
+    background: #ffffff;
+    color: #1a202c;
     padding: 20px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.75rem;
+    letter-spacing: -0.5px;
 }
 
 main {
     display: flex;
     justify-content: center;
-    padding: 20px 20px 0px 20px;
-    gap: 20px;
+    align-items: flex-start;
+    padding: 40px 20px;
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
+/* Map Card */
 svg {
-    border: 1px solid #ccc;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Modern soft shadow */
     fill: #6f9c76;
     stroke: #ffffff;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-width: .5;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+    stroke-width: 1.2; /* Slightly thicker for clarity */
+    border: none;
+    transition: all 0.3s ease;
 }
 
 .county {
     cursor: pointer;
-    transition: fill 0.3s;
+    transition: fill 0.2s ease;
 }
 
 .county:hover {
-    fill: #FFEB3B;
+    fill: #fcd34d; /* Warm yellow */
 }
 
 .county-hit:hover {
-    fill: #FFEB3B;
+    fill: #fcd34d;
 }
 
 .county.selected {
-    fill: #FF5722;
+    fill: #f97316; /* Clean orange */
 }
 
 .county-hit.selected {
-    fill: #FF5722;
+    fill: #f97316;
 }
 
 .county-hit {
@@ -53,153 +75,214 @@ svg {
     pointer-events: visibleStroke;
 }
 
+/* Info Card */
 #card-container {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    width: 320px;
+    min-height: 480px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    width: 300px;
-    min-height: 450px;
-    background: #fff;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+#card-container h {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #4a5568;
+    margin-bottom: 5px;
+    display: block;
 }
 
 .info-panel {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: none;
+    box-shadow: none;
+    padding: 10px 0;
     opacity: 0;
+    transition: opacity 0.4s ease;
 }
 
 .info-panel.selected {
     opacity: 1;
 }
 
+.info-panel h2 {
+    margin-top: 0;
+    color: #2d3748;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.info-panel p {
+    color: #4a5568;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+#regionSelect {
+    width: 100%;
+    padding: 12px 16px;
+    margin-top: 15px;
+    font-size: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #f8fafc;
+    color: #4a5568;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+}
+
+#regionSelect:focus {
+    border-color: #cbd5e1;
+}
+
+/* Buttons */
+.spot-btn {
+    display: inline-block;
+    margin: 8px 8px 0 0;
+    padding: 10px 18px;
+    font-size: 14px;
+    border: none;
+    border-radius: 25px; /* Pill shape */
+    background: #f1f5f9;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+}
+
+.spot-btn:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+    color: #334155;
+}
+
+.spot-btn:active {
+    transform: translateY(0);
+}
+
+.spot-btn.active {
+    background: #f97316;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.3);
+}
+
+/* Image & Slideshow Containers */
 #image-area, #slideshow-container {
     position: relative;
-    top: -25px;
-    width: 80%;
-    /* 讓圖片寬度佔據頁面大部分 */
     max-width: 900px;
-    margin: 40px auto 0;
-    /* 距離地圖容器 40px，並水平置中 */
-    padding: 15px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     text-align: center;
     display: none;
 }
 
 #image-area.visible, #slideshow-container.visible {
     display: block;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 #region-image {
-    display: block;
     width: 100%;
     height: auto;
-    max-height: 600px;
-    /* 限制大圖高度 */
+    max-height: 550px;
     object-fit: cover;
-    border-radius: 4px;
-    opacity: 0.1;
-    /* 初始降低透明度，讓它不那麼顯眼 */
+    border-radius: 12px;
+    opacity: 0;
     transition: opacity 0.5s ease;
 }
 
 #image-area.visible #region-image {
     opacity: 1;
-    /* 點擊後完全顯示 */
 }
 
 #image-caption {
-    margin-top: 10px;
-    color: #777;
+    margin-top: 20px;
+    color: #718096;
     font-size: 1.1em;
+    font-weight: 500;
 }
 
-#regionSelect {
-    display: block;
-    margin: 10px;
-    padding: 8px;
-    font-size: 16px;
-}
-
-.spot-btn {
-    display: inline-block;
-    margin: 5px 5px 0 0;
-    padding: 6px 12px;
-    font-size: 14px;
-    border: 1px solid #888;
-    border-radius: 4px;
-    background: #f5f5f5;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.spot-btn:hover {
-    background: #ffcc66;
-    border-color: #cc9933;
-}
-
-.spot-btn:active {
-    background: #ff9933;
-    color: #fff;
-}
-
-.spot-btn.active {
-    background: #ff9933;
-    color: #fff;
-    border-color: #cc6600;
-    font-weight: bold;
-}
-
-/* 123 */
+/* Slideshow */
 .slideshow {
-  position: relative;
-  width: 100%;
-  max-height: 450px;
+    position: relative;
+    width: 100%;
+    max-height: 450px;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
 .slide {
-  display: none;
-  width: 100%;
-  height: auto;
-  max-height: 450px;
-  object-fit: cover;
-  border-radius: 4px;
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .slide.active {
-  display: block;
+    display: block;
 }
 
-/* 左右箭頭 */
 .arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2.5em;
-  color: white;
-  background: rgba(0,0,0,0.3);
-  padding: 8px;
-  border-radius: 50%;
-  cursor: pointer;
-  user-select: none;
-}
-
-.arrow.left {
-  left: 15px;
-}
-
-.arrow.right {
-  right: 15px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    font-size: 1.5em;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .arrow:hover {
-  background: rgba(0,0,0,0.6);
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.arrow.left { left: 20px; }
+.arrow.right { right: 20px; }
+
+/* Mobile Responsiveness */
+@media (max-width: 960px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+    }
+    
+    #card-container {
+        width: 100%;
+        max-width: 600px;
+        min-height: auto;
+    }
+    
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
 }

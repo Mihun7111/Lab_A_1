@@ -74,7 +74,10 @@ function activate(countyData) {
 
             // ✅ 設定目前按下的按鈕為 active
             this.classList.add("active");
+            // 滚動到地圖區域
+            imageArea.scrollIntoView({ behavior: "smooth", block: "end" });
         }
+
 
         spot.addEventListener("click", spotClicked);
     }
@@ -94,6 +97,8 @@ for (let countyData of countyEl) {
     function clicked() {
         activate(countyData);
         regionSelect.value = name;
+        // 滚動到地圖區域
+        imageArea.scrollIntoView({ behavior: "smooth", block: "end" });
     }
 
     if (county) {
@@ -119,6 +124,8 @@ function changeSelect(e) {
     console.log(target);
     if (target) {
         activate(target);
+        // 滚動到地圖區域
+        imageArea.scrollIntoView({ behavior: "smooth", block: "end" });
     }
 }
 regionSelect.addEventListener('change', changeSelect);
